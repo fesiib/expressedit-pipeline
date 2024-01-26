@@ -463,6 +463,8 @@ def get_references_evaluation(prediction, ground_truth):
         prediction,
         expanded_ground_truth,
     )
+    #aggregate
+    cosine_scores_agg, top_10_paris_agg = get_cosine_similarity_scores([", ".join(prediction)], [", ".join(ground_truth)])
     precision_expanded = 0
     recall_expanded = 0
     f1_expanded = 0
@@ -501,6 +503,10 @@ def get_references_evaluation(prediction, ground_truth):
     if precision + recall > 0:
         f1 = 2 * precision * recall / (precision + recall)
 
+    precision = cosine_scores_agg[0][0]
+    recall = cosine_scores_agg[0][0]
+    f1 = cosine_scores_agg[0][0]
+    
     return (
         f1,
         precision,
