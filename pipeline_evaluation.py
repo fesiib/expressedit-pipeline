@@ -149,12 +149,12 @@ def print_evaluation_summary(result):
                         if metric in ["f1", "precision", "recall"]:
                             local_result[metric].append(info[metric])
                     else:
-                        # # conservative
-                        # if metric in ["f1", "precision", "recall"]:
-                        #     local_result[metric].append(info[metric])
+                        # conservative
+                        if metric in ["f1", "precision", "recall"]:
+                            local_result[metric].append(info[metric])
                         
                         # expanded
-                        if metric in ["f1_expanded", "precision_expanded", "recall_expanded"]:
+                        # if metric in ["f1_expanded", "precision_expanded", "recall_expanded"]:
                             # if info[metric] < 0:
                             #     local_result[metric.replace("_expanded", "")].append(-1)
                             #     continue
@@ -162,7 +162,7 @@ def print_evaluation_summary(result):
                             # if info[metric] < COSINE_SIMILARITY_THRESHOLD:
                             #     score = 0
                             # local_result[metric.replace("_expanded", "")].append(score)
-                            local_result[metric.replace("_expanded", "")].append(info[metric])
+                        #     local_result[metric.replace("_expanded", "")].append(info[metric])
             for metric in local_result:
                 avg, std = avg_std(local_result[metric])
                 print("AVG:\t", round_number(avg), "STD:\t", round_number(std), f"\t{metric[0:4]}:\t",  " <-- ", [round_number(x) for x in local_result[metric]])
